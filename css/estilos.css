@@ -1,0 +1,16 @@
+header, footer {
+  background-color: #f4f4f4;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #007BFF;
+}
+
+main {
+  padding: 20px;
+}

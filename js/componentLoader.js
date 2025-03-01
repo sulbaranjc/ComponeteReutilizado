@@ -13,7 +13,6 @@ async function cargarComponente(elemento) {
 
       const html = await response.text();
       elemento.innerHTML = html;
-
   } catch (error) {
       console.error(`Error al cargar componente desde ${archivo}:`, error);
   }
