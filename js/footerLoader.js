@@ -1,17 +1,14 @@
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-      const response = await fetch('footer.html');
-      if (!response.ok) {
-          throw new Error(`Error al cargar el footer: ${response.status} ${response.statusText}`);
-      }
+    const resp = await fetch('componentes/footer.html', { credentials: 'same-origin' });
+    if (!resp.ok) throw new Error(`Error ${resp.status} al cargar footer.html`);
+    const html = await resp.text();
 
-      const html = await response.text();
-
-      const footerContainer = document.getElementById('footer');
-      if (footerContainer) {
-          footerContainer.innerHTML = html;
-      }
-  } catch (error) {
-      console.error('Error al cargar el footer:', error);
+    const container = document.getElementById('footer');
+    if (container) {
+      container.innerHTML = html;
+    }
+  } catch (err) {
+    console.error('FooterLoader:', err);
   }
 });

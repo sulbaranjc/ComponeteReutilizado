@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Inicio - Mi Proyecto Web</title>
-    <link rel="stylesheet" href="css/estilos.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inicio - Mi Proyecto Web</title>
+  <link rel="stylesheet" href="css/estilos.css"/>
 </head>
 <body>
-  <h1>Página de Inicio</h1>
-  <a href="contacto.html">Contacto</a>
-  <p>Bienvenido a mi proyecto web.</p>
+  <!-- Header reutilizado por loader específico -->
+  <div id="header"></div>
+
+  <main id="contenido">
+    <h1 class="page-title">Página de Inicio</h1>
+    <p><a href="contacto.html">Contacto</a></p>
+    <p>Bienvenido a mi proyecto web.</p>
+  </main>
+
+  <!-- Footer reutilizado por loader específico -->
   <div id="footer"></div>
+
+  <script src="js/headerLoader.js"></script>
   <script src="js/footerLoader.js"></script>
 </body>
 </html>
