@@ -1,0 +1,46 @@
+/* ===== Layout base: sticky footer con Flex ===== */
+html, body { height: 100%; }
+body {
+  margin: 0;                 /* quita margen por defecto */
+  min-height: 100svh;        /* 100% alto de viewport, respetando barras móviles */
+  display: flex;
+  flex-direction: column;    /* hijos verticales: header (include), main, footer (include) */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #111;
+}
+
+/* La zona de contenido crece y empuja el footer hacia abajo */
+main {
+  flex: 1 0 auto;            /* <- CLAVE para sticky footer */
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+}
+
+/* Header y footer (inyectados) no crecen */
+[data-include][role="contentinfo"],
+.hero {                       /* .hero viene del header.html */
+  flex: 0 0 auto;
+}
+
+/* Tipografía de la página */
+h1.page-title {
+  text-align: center;         /* <- centrado del título */
+  margin: 1.5rem 0 1rem;
+  font-size: clamp(1.6rem, 2vw + 1rem, 2.2rem);
+  font-weight: 700;
+}
+
+/* Links del contenido */
+main a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Detalle visual muy sutil */
+hr.line {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 1rem 0;
+}

@@ -1,0 +1,56 @@
+<!-- componentes/header.html -->
+<header class="hero" role="banner">
+  <!-- Enlace de salto a contenido -->
+  <a class="hero-skip" href="#contenido">Saltar al contenido</a>
+
+  <div class="hero-wrap">
+    <!-- Logo -->
+    <a class="hero-logo" href="index.html" aria-label="Ir al inicio">
+      <!-- Puedes cambiar por una imagen <img> -->
+      <span class="hero-logo-mark">◆</span>
+    </a>
+
+    <!-- Título / Nombre de la app -->
+    <div class="hero-title" aria-label="Nombre de la aplicación">
+      Mi Proyecto Web
+    </div>
+
+    <!-- Toggle responsive (sin JS, con checkbox-hack) -->
+    <input type="checkbox" id="hero-menu-toggle" class="hero-toggle" aria-label="Abrir menú" />
+    <label for="hero-menu-toggle" class="hero-burger" aria-hidden="true">☰</label>
+
+    <!-- Navegación -->
+    <nav class="hero-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <style>
+    /* ----- Reset mínimo del header (scoped al insertarlo) ----- */
+    .hero { position: relative; border-bottom: 1px solid #eee; background:#fff; }
+    .hero-wrap { max-width: 1100px; margin: 0 auto; padding: .75rem 1rem; display: grid; 
+                 grid-template-columns: auto 1fr auto; align-items: center; gap: .75rem; }
+    .hero-logo { text-decoration: none; color: inherit; display: inline-flex; align-items:center; }
+    .hero-logo-mark { display:inline-grid; place-items:center; width:32px; height:32px; 
+                      border-radius: 8px; border:1px solid #111; font-weight:700; }
+    .hero-title { text-align:center; font-weight: 700; letter-spacing:.2px; }
+    .hero-nav ul { display:flex; gap: 1rem; list-style:none; padding:0; margin:0; }
+    .hero-nav a { text-decoration: none; color:#111; padding:.25rem .5rem; border-radius:.5rem; }
+    .hero-nav a:hover { background:#f2f2f2; }
+    /* Enlace de salto (accessibility) */
+    .hero-skip { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    .hero-skip:focus { position:static; width:auto; height:auto; padding:.25rem .5rem; 
+                       background:#000; color:#fff; border-radius:.25rem; margin:.25rem 1rem; display:inline-block; }
+    /* Burger (responsive) */
+    .hero-burger { display:none; user-select:none; cursor:pointer; font-size:1.25rem; line-height:1; padding:.25rem .5rem; }
+    .hero-toggle { display:none; }
+    /* Active state (si marcas aria-current o .is-active) */
+    .hero-nav a[aria-current="page"], .hero-nav a.is-active { font-weight:700; text-decoration:underline; }
+
+    /* ----- Responsive ----- */
+    @media (max-width: 720px) {
+      .hero-wrap { grid-template-columns: auto 1fr auto; }
+      .hero-title { f

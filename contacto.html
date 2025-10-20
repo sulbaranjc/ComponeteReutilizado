@@ -7,12 +7,20 @@
   <link rel="stylesheet" href="css/estilos.css"/>
 </head>
 <body>
-  <h1>Contacto</h1>
-  <a href="index.html">Inicio</a>
-  <p>Ponte en contacto con nosotros.</p>
+  <!-- Header reutilizable -->
+  <div data-include="componentes/header.html"></div>
 
+  <main id="contenido">
+    <h1 class="page-title">Contacto</h1>
+
+    <p><a href="index.html">Inicio</a></p>
+    <p>Ponte en contacto con nosotros.</p>
+  </main>
+
+  <!-- Footer reutilizable -->
   <div data-include="componentes/footer.html" role="contentinfo" aria-label="Pie de página"></div>
 
   <script type="module" src="js/includes.js"></script>
+  <script type="module" src="js/index.js"></script>
 </body>
 </html>

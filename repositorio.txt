@@ -1,5 +1,223 @@
 # Recolector de fuentes
 
+- Fecha de generación: 2025-10-20 13:26:58
+- Raíz: `D:/ILERNA/2025-2026/Desarrollo de interfaces/ComponeteReutilizado`
+- Archivo de salida: `repositorio.txt` (chunk 1/1)
+
+## Árbol de archivos incluidos
+
+```text
+
+```
+
+## Índice global (archivo → chunk)
+
+- [001] componentes/footer.html
+- [001] componentes/header.html
+- [001] contacto.html
+- [001] index.html
+- [001] js/includes.js
+- [001] js/index.js
+- [001] repositorio.txt
+
+## Archivos omitidos (razones)
+
+_No se omitieron archivos._
+
+---
+
+js/includes.js
+-----
+```javascript
+// Cargador genérico de fragmentos HTML con caché y fallback
+const cache = new Map();
+
+async function loadFragment(url) {
+  if (cache.has(url)) return cache.get(url);
+
+  const p = fetch(url, { credentials: "same-origin" })
+    .then(r => {
+      if (!r.ok) throw new Error(`Error ${r.status} al cargar ${url}`);
+      return r.text();
+    });
+  cache.set(url, p);
+  return p;
+}
+
+function resolveUrl(base, relative) {
+  try { return new URL(relative, base).toString(); }
+  catch { return relative; }
+}
+
+async function hydrateIncludes() {
+  const nodes = document.querySelectorAll("[data-include]");
+  await Promise.all([...nodes].map(async el => {
+    const src = el.getAttribute("data-include");
+    const url = resolveUrl(document.baseURI, src);
+    try {
+      const html = await loadFragment(url);
+      el.innerHTML = html;
+      el.dispatchEvent(new CustomEvent("included", { detail: { url } }));
+    } catch (err) {
+      console.error(err);
+      el.innerHTML = `
+        <div role="alert" style="padding:.5rem;border:1px solid #e99">
+          No se pudo cargar: <code>${src}</code>
+        </div>`;
+    }
+  }));
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", hydrateIncludes);
+} else {
+  hydrateIncludes();
+}
+
+```
+
+js/index.js
+-----
+```javascript
+  document.addEventListener("included", () => {
+    const here = location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll(".hero-nav a").forEach(a => {
+      const file = a.getAttribute("href");
+      if (file === here) a.setAttribute("aria-current", "page");
+    });
+  });
+```
+
+componentes/footer.html
+-----
+```html
+<footer>
+  <p>Este footer es un componente reutilizable</p>
+  <p>© 2025 Mi Proyecto Web</p>
+</footer>
+
+```
+
+componentes/header.html
+-----
+```html
+<!-- componentes/header.html -->
+<header class="hero" role="banner">
+  <!-- Enlace de salto a contenido -->
+  <a class="hero-skip" href="#contenido">Saltar al contenido</a>
+
+  <div class="hero-wrap">
+    <!-- Logo -->
+    <a class="hero-logo" href="index.html" aria-label="Ir al inicio">
+      <!-- Puedes cambiar por una imagen <img> -->
+      <span class="hero-logo-mark">◆</span>
+    </a>
+
+    <!-- Título / Nombre de la app -->
+    <div class="hero-title" aria-label="Nombre de la aplicación">
+      Mi Proyecto Web
+    </div>
+
+    <!-- Toggle responsive (sin JS, con checkbox-hack) -->
+    <input type="checkbox" id="hero-menu-toggle" class="hero-toggle" aria-label="Abrir menú" />
+    <label for="hero-menu-toggle" class="hero-burger" aria-hidden="true">☰</label>
+
+    <!-- Navegación -->
+    <nav class="hero-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <style>
+    /* ----- Reset mínimo del header (scoped al insertarlo) ----- */
+    .hero { position: relative; border-bottom: 1px solid #eee; background:#fff; }
+    .hero-wrap { max-width: 1100px; margin: 0 auto; padding: .75rem 1rem; display: grid; 
+                 grid-template-columns: auto 1fr auto; align-items: center; gap: .75rem; }
+    .hero-logo { text-decoration: none; color: inherit; display: inline-flex; align-items:center; }
+    .hero-logo-mark { display:inline-grid; place-items:center; width:32px; height:32px; 
+                      border-radius: 8px; border:1px solid #111; font-weight:700; }
+    .hero-title { text-align:center; font-weight: 700; letter-spacing:.2px; }
+    .hero-nav ul { display:flex; gap: 1rem; list-style:none; padding:0; margin:0; }
+    .hero-nav a { text-decoration: none; color:#111; padding:.25rem .5rem; border-radius:.5rem; }
+    .hero-nav a:hover { background:#f2f2f2; }
+    /* Enlace de salto (accessibility) */
+    .hero-skip { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    .hero-skip:focus { position:static; width:auto; height:auto; padding:.25rem .5rem; 
+                       background:#000; color:#fff; border-radius:.25rem; margin:.25rem 1rem; display:inline-block; }
+    /* Burger (responsive) */
+    .hero-burger { display:none; user-select:none; cursor:pointer; font-size:1.25rem; line-height:1; padding:.25rem .5rem; }
+    .hero-toggle { display:none; }
+    /* Active state (si marcas aria-current o .is-active) */
+    .hero-nav a[aria-current="page"], .hero-nav a.is-active { font-weight:700; text-decoration:underline; }
+
+    /* ----- Responsive ----- */
+    @media (max-width: 720px) {
+      .hero-wrap { grid-template-columns: auto 1fr auto; }
+      .hero-title { f
+
+```
+
+contacto.html
+-----
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto - Mi Proyecto Web</title>
+  <link rel="stylesheet" href="css/estilos.css"/>
+</head>
+<body>
+  <div data-include="componentes/header.html"></div>
+  <h1>Contacto</h1>
+  <p>Ponte en contacto con nosotros.</p>
+
+  <div data-include="componentes/footer.html" role="contentinfo" aria-label="Pie de página"></div>
+
+  <script type="module" src="js/includes.js"></script>
+</body>
+</html>
+
+```
+
+index.html
+-----
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inicio - Mi Proyecto Web</title>
+  <link rel="stylesheet" href="css/estilos.css"/>
+</head>
+<body>
+    <!-- Header reutilizable -->
+  <div data-include="componentes/header.html"></div>
+
+  <h1>Página de Inicio</h1>
+  <a href="contacto.html">Contacto</a>
+  <p>Bienvenido a mi proyecto web.</p>
+
+  <!-- Componente genérico -->
+  <div data-include="componentes/footer.html" role="contentinfo" aria-label="Pie de página"></div>
+
+  <script type="module" src="js/includes.js"></script>
+  <script type="module" src="js/index.js"></script>
+</body>
+</html>
+
+```
+
+repositorio.txt
+-----
+```
+# Recolector de fuentes
+
 - Fecha de generación: 2025-10-20 13:14:07
 - Raíz: `D:/ILERNA/2025-2026/Desarrollo de interfaces/ComponeteReutilizado`
 - Archivo de salida: `repositorio.txt` (chunk 1/1)
@@ -562,6 +780,9 @@ index.html
   <script src="js/footerLoader.js"></script>
 </body>
 </html>
+
+```
+
 
 ```
 
