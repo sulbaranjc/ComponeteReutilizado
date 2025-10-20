@@ -1,5 +1,213 @@
 # Recolector de fuentes
 
+- Fecha de generación: 2025-10-20 14:12:53
+- Raíz: `D:/ILERNA/2025-2026/Desarrollo de interfaces/ComponeteReutilizado`
+- Archivo de salida: `repositorio.txt` (chunk 1/1)
+
+## Árbol de archivos incluidos
+
+```text
+
+```
+
+## Índice global (archivo → chunk)
+
+- [001] contacto.html
+- [001] css/estilos.css
+- [001] index.html
+- [001] repositorio.txt
+
+## Archivos omitidos (razones)
+
+_No se omitieron archivos._
+
+---
+
+contacto.html
+-----
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto - Mi Proyecto Web</title>
+  <link rel="stylesheet" href="css/estilos.css"/>
+</head>
+<body>
+  <!-- ===== Header (DUPLICADO) ===== -->
+  <header class="hero" role="banner">
+    <a class="hero-skip" href="#contenido">Saltar al contenido</a>
+    <div class="hero-wrap">
+      <a class="hero-logo" href="index.html" aria-label="Ir al inicio">
+        <span class="hero-logo-mark">◆</span>
+      </a>
+      <div class="hero-title" aria-label="Nombre de la aplicación">Mi Proyecto Web</div>
+      <input type="checkbox" id="hero-menu-toggle" class="hero-toggle" aria-label="Abrir menú" />
+      <label for="hero-menu-toggle" class="hero-burger" aria-hidden="true">☰</label>
+      <nav class="hero-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="contacto.html" aria-current="page">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <h1 class="page-title">Contacto</h1>
+    <p><a href="index.html">Inicio</a></p>
+    <p>Ponte en contacto con nosotros.</p>
+  </main>
+
+  <!-- ===== Footer (DUPLICADO) ===== -->
+  <footer role="contentinfo" aria-label="Pie de página">
+    <div class="footer-wrap">
+      <p>© 2025 Mi Proyecto Web</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+```
+
+index.html
+-----
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inicio - Mi Proyecto Web</title>
+  <link rel="stylesheet" href="css/estilos.css"/>
+</head>
+<body>
+  <!-- ===== Header (DUPLICADO) ===== -->
+  <header class="hero" role="banner">
+    <a class="hero-skip" href="#contenido">Saltar al contenido</a>
+    <div class="hero-wrap">
+      <a class="hero-logo" href="index.html" aria-label="Ir al inicio">
+        <span class="hero-logo-mark">◆</span>
+      </a>
+      <div class="hero-title" aria-label="Nombre de la aplicación">Mi Proyecto Web</div>
+      <input type="checkbox" id="hero-menu-toggle" class="hero-toggle" aria-label="Abrir menú" />
+      <label for="hero-menu-toggle" class="hero-burger" aria-hidden="true">☰</label>
+      <nav class="hero-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html" aria-current="page">Inicio</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <h1 class="page-title">Página de Inicio</h1>
+    <p><a href="contacto.html">Contacto</a></p>
+    <p>Bienvenido a mi proyecto web.</p>
+  </main>
+
+  <!-- ===== Footer (DUPLICADO) ===== -->
+  <footer role="contentinfo" aria-label="Pie de página">
+    <div class="footer-wrap">
+      <p>© 2025 Mi Proyecto Web</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+```
+
+css/estilos.css
+-----
+```css
+/* ===== Layout base: sticky footer con Flex ===== */
+html, body { height: 100%; }
+body {
+  margin: 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;          /* header, main, footer */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #111;
+}
+
+/* Main crece para empujar el footer al borde inferior en páginas cortas */
+main {
+  flex: 1 0 auto;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+}
+
+/* Tipografía y detalles comunes */
+h1.page-title {
+  text-align: center;
+  margin: 1.5rem 0 1rem;
+  font-size: clamp(1.6rem, 2vw + 1rem, 2.2rem);
+  font-weight: 700;
+}
+main a { color: inherit; text-decoration: underline; }
+
+/* ===== Hero/Header (sin JS) ===== */
+.hero { position: relative; border-bottom: 1px solid #eee; background:#fff; flex: 0 0 auto; }
+.hero-wrap {
+  max-width: 1100px; margin: 0 auto; padding: .75rem 1rem;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .75rem;
+}
+.hero-logo { text-decoration: none; color: inherit; display: inline-flex; align-items:center; }
+.hero-logo-mark {
+  display:inline-grid; place-items:center; width:32px; height:32px;
+  border-radius: 8px; border:1px solid #111; font-weight:700;
+}
+.hero-title { text-align:center; font-weight:700; letter-spacing:.2px; }
+.hero-nav ul { display:flex; gap: 1rem; list-style:none; padding:0; margin:0; }
+.hero-nav a { text-decoration: none; color:#111; padding:.25rem .5rem; border-radius:.5rem; }
+.hero-nav a:hover { background:#f2f2f2; }
+
+/* Enlace de salto (accesibilidad) */
+.hero-skip { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+.hero-skip:focus {
+  position:static; width:auto; height:auto; padding:.25rem .5rem;
+  background:#000; color:#fff; border-radius:.25rem; margin:.25rem 1rem; display:inline-block;
+}
+
+/* Burger responsive (checkbox-hack sin JS) */
+.hero-burger { display:none; user-select:none; cursor:pointer; font-size:1.25rem; line-height:1; padding:.25rem .5rem; }
+.hero-toggle { display:none; }
+
+/* Estado activo accesible */
+.hero-nav a[aria-current="page"], .hero-nav a.is-active { font-weight:700; text-decoration:underline; }
+
+/* Responsive */
+@media (max-width: 720px) {
+  .hero-title { font-size: 1rem; }
+  .hero-burger { display:inline-block; }
+  .hero-nav {
+    position:absolute; right: 1rem; top: 58px; background:#fff; border:1px solid #eee;
+    border-radius:.75rem; box-shadow:0 8px 24px rgba(0,0,0,.08); padding:.5rem; display:none;
+  }
+  .hero-nav ul { flex-direction: column; gap:.25rem; }
+  /* Mostrar menú cuando el checkbox está marcado */
+  .hero-toggle:checked ~ .hero-nav { display:block; }
+}
+
+/* ===== Footer ===== */
+footer { border-top: 1px solid #eee; background:#fff; flex: 0 0 auto; }
+footer .footer-wrap {
+  max-width:1100px; margin:0 auto; padding:1rem 1.25rem; color:#111;
+  font-size:.95rem;
+}
+
+```
+
+repositorio.txt
+-----
+```
+# Recolector de fuentes
+
 - Fecha de generación: 2025-10-20 10:52:04
 - Raíz: `D:/ILERNA/2025-2026/Desarrollo de interfaces/ComponeteReutilizado`
 - Archivo de salida: `repositorio.txt` (chunk 1/1)
@@ -100,6 +308,9 @@ index.html
   <script src="js/footerLoader.js"></script>
 </body>
 </html>
+
+```
+
 
 ```
 

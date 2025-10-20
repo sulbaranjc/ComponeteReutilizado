@@ -1,18 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Contacto - Mi Proyecto Web</title>
-    <link rel="stylesheet" href="css/estilos.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto - Mi Proyecto Web</title>
+  <link rel="stylesheet" href="css/estilos.css"/>
 </head>
 <body>
-    <h1>Contacto</h1>
-    <a href="index.html">Inicio</a>
+  <!-- ===== Header (DUPLICADO) ===== -->
+  <header class="hero" role="banner">
+    <a class="hero-skip" href="#contenido">Saltar al contenido</a>
+    <div class="hero-wrap">
+      <a class="hero-logo" href="index.html" aria-label="Ir al inicio">
+        <span class="hero-logo-mark">◆</span>
+      </a>
+      <div class="hero-title" aria-label="Nombre de la aplicación">Mi Proyecto Web</div>
+      <input type="checkbox" id="hero-menu-toggle" class="hero-toggle" aria-label="Abrir menú" />
+      <label for="hero-menu-toggle" class="hero-burger" aria-hidden="true">☰</label>
+      <nav class="hero-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="contacto.html" aria-current="page">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+<!-- ===== Main ===== -->
+  <main id="contenido">
+    <h1 class="page-title">Contacto</h1>
+    <p><a href="index.html">Inicio</a></p>
     <p>Ponte en contacto con nosotros.</p>
+  </main>
 
-    <div id="footer"></div>
-
-    <script src="js/footerLoader.js"></script>
+  <!-- ===== Footer (DUPLICADO) ===== -->
+  <footer role="contentinfo" aria-label="Pie de página">
+    <div class="footer-wrap">
+      <p>© 2025 Mi Proyecto Web</p>
+    </div>
+  </footer>
 </body>
 </html>
