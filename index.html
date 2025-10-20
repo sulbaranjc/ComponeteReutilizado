@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Inicio - Mi Proyecto Web</title>
-    <link rel="stylesheet" href="css/estilos.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inicio - Mi Proyecto Web</title>
+  <link rel="stylesheet" href="css/estilos.css"/>
 </head>
 <body>
   <h1>Página de Inicio</h1>
   <a href="contacto.html">Contacto</a>
   <p>Bienvenido a mi proyecto web.</p>
-  <div id="footer"></div>
-  <script src="js/footerLoader.js"></script>
+
+  <!-- Componente genérico -->
+  <div data-include="componentes/footer.html" role="contentinfo" aria-label="Pie de página"></div>
+
+  <script type="module" src="js/includes.js"></script>
 </body>
 </html>
