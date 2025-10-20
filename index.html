@@ -7,8 +7,24 @@
   <link rel="stylesheet" href="css/estilos.css"/>
 </head>
 <body>
-  <!-- Header reutilizado por loader específico -->
-  <div id="header"></div>
+  <!-- ===== Header (DUPLICADO) ===== -->
+  <header class="hero" role="banner">
+    <a class="hero-skip" href="#contenido">Saltar al contenido</a>
+    <div class="hero-wrap">
+      <a class="hero-logo" href="index.html" aria-label="Ir al inicio">
+        <span class="hero-logo-mark">◆</span>
+      </a>
+      <div class="hero-title" aria-label="Nombre de la aplicación">Mi Proyecto Web</div>
+      <input type="checkbox" id="hero-menu-toggle" class="hero-toggle" aria-label="Abrir menú" />
+      <label for="hero-menu-toggle" class="hero-burger" aria-hidden="true">☰</label>
+      <nav class="hero-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html" aria-current="page">Inicio</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <main id="contenido">
     <h1 class="page-title">Página de Inicio</h1>
@@ -16,10 +32,11 @@
     <p>Bienvenido a mi proyecto web.</p>
   </main>
 
-  <!-- Footer reutilizado por loader específico -->
-  <div id="footer"></div>
-
-  <script src="js/headerLoader.js"></script>
-  <script src="js/footerLoader.js"></script>
+  <!-- ===== Footer (DUPLICADO) ===== -->
+  <footer role="contentinfo" aria-label="Pie de página">
+    <div class="footer-wrap">
+      <p>© 2025 Mi Proyecto Web</p>
+    </div>
+  </footer>
 </body>
 </html>
