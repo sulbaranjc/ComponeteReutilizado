@@ -1,5 +1,167 @@
 # Recolector de fuentes
 
+- Fecha de generación: 2025-10-20 12:22:54
+- Raíz: `D:/ILERNA/2025-2026/Desarrollo de interfaces/ComponeteReutilizado`
+- Archivo de salida: `repositorio.txt` (chunk 1/1)
+
+## Árbol de archivos incluidos
+
+```text
+
+```
+
+## Índice global (archivo → chunk)
+
+- [001] componentes/footer.html
+- [001] contacto.html
+- [001] index.html
+- [001] js/footerLoader.js
+- [001] js/includes.js
+- [001] repositorio.txt
+
+## Archivos omitidos (razones)
+
+_No se omitieron archivos._
+
+---
+
+js/footerLoader.js
+-----
+```javascript
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+      const response = await fetch('footer.html');
+      if (!response.ok) {
+          throw new Error(`Error al cargar el footer: ${response.status} ${response.statusText}`);
+      }
+
+      const html = await response.text();
+
+      const footerContainer = document.getElementById('footer');
+      if (footerContainer) {
+          footerContainer.innerHTML = html;
+      }
+  } catch (error) {
+      console.error('Error al cargar el footer:', error);
+  }
+});
+
+```
+
+js/includes.js
+-----
+```javascript
+// Cargador genérico de fragmentos HTML con caché y fallback
+const cache = new Map();
+
+async function loadFragment(url) {
+  if (cache.has(url)) return cache.get(url);
+
+  const p = fetch(url, { credentials: "same-origin" })
+    .then(r => {
+      if (!r.ok) throw new Error(`Error ${r.status} al cargar ${url}`);
+      return r.text();
+    });
+  cache.set(url, p);
+  return p;
+}
+
+function resolveUrl(base, relative) {
+  try { return new URL(relative, base).toString(); }
+  catch { return relative; }
+}
+
+async function hydrateIncludes() {
+  const nodes = document.querySelectorAll("[data-include]");
+  await Promise.all([...nodes].map(async el => {
+    const src = el.getAttribute("data-include");
+    const url = resolveUrl(document.baseURI, src);
+    try {
+      const html = await loadFragment(url);
+      el.innerHTML = html;
+      el.dispatchEvent(new CustomEvent("included", { detail: { url } }));
+    } catch (err) {
+      console.error(err);
+      el.innerHTML = `
+        <div role="alert" style="padding:.5rem;border:1px solid #e99">
+          No se pudo cargar: <code>${src}</code>
+        </div>`;
+    }
+  }));
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", hydrateIncludes);
+} else {
+  hydrateIncludes();
+}
+
+```
+
+componentes/footer.html
+-----
+```html
+<footer>
+  <p>Este footer es un componente reutilizable</p>
+  <p>© 2025 Mi Proyecto Web</p>
+</footer>
+
+```
+
+contacto.html
+-----
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto - Mi Proyecto Web</title>
+  <link rel="stylesheet" href="css/estilos.css"/>
+</head>
+<body>
+  <h1>Contacto</h1>
+  <a href="index.html">Inicio</a>
+  <p>Ponte en contacto con nosotros.</p>
+
+  <div data-include="componentes/footer.html" role="contentinfo" aria-label="Pie de página"></div>
+
+  <script type="module" src="js/includes.js"></script>
+</body>
+</html>
+
+```
+
+index.html
+-----
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inicio - Mi Proyecto Web</title>
+  <link rel="stylesheet" href="css/estilos.css"/>
+</head>
+<body>
+  <h1>Página de Inicio</h1>
+  <a href="contacto.html">Contacto</a>
+  <p>Bienvenido a mi proyecto web.</p>
+
+  <!-- Componente genérico -->
+  <div data-include="componentes/footer.html" role="contentinfo" aria-label="Pie de página"></div>
+
+  <script type="module" src="js/includes.js"></script>
+</body>
+</html>
+
+```
+
+repositorio.txt
+-----
+```
+# Recolector de fuentes
+
 - Fecha de generación: 2025-10-20 12:00:14
 - Raíz: `D:/ILERNA/2025-2026/Desarrollo de interfaces/ComponeteReutilizado`
 - Archivo de salida: `repositorio.txt` (chunk 1/1)
@@ -262,6 +424,9 @@ index.html
   <script src="js/footerLoader.js"></script>
 </body>
 </html>
+
+```
+
 
 ```
 
